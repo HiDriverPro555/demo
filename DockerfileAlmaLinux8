@@ -80,7 +80,9 @@ RUN printf '<FilesMatch \\.php$>\n    SetHandler "proxy:unix:/run/php-fpm/www.so
 # Exponer puertos específicos
 EXPOSE 80 
 
-VOLUME /var/www/html/webimages
+# Declarar el volumen de datos para respaldo y persistencia
+VOLUME ["/var/www/html/webimages"]
+
 
 
 # Comando de inicio
