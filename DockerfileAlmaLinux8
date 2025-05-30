@@ -79,9 +79,7 @@ RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/httpd/conf/h
 
 # Proxy PHP-FPM
 RUN printf '<FilesMatch \\.php$>\n    SetHandler "proxy:unix:/run/php-fpm/www.sock|fcgi://localhost"\n</FilesMatch>\n' > /etc/httpd/conf.d/php-fpm.conf
-# VirtualHost principal
-COPY /config/hidriver.conf /etc/httpd/conf.d/hidriver.conf
-# VirtualHost subdominio
+
 # Exponer puertos específicos
 EXPOSE 80 
 
