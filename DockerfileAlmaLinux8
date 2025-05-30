@@ -66,10 +66,7 @@ RUN mkdir -p /run/php-fpm && \
 # Copiar código fuente
 COPY ./ /var/www/html/
 RUN chown -R apache:apache /var/www/html && \
-    chmod -R 755 /var/www/html && \
-    chmod 755 -Rf /var/www/html/webimages/ && \
-    mkdir -p /var/www/html/webimages/lockFile && \
-    chmod 755 -Rf /var/www/html/webimages/script_files/lockFile
+    chmod -R 755 /var/www/html
 
 # Activar mod_rewrite y aumentar límites de URI
 RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/httpd/conf/httpd.conf && \
