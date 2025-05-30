@@ -80,6 +80,9 @@ RUN printf '<FilesMatch \\.php$>\n    SetHandler "proxy:unix:/run/php-fpm/www.so
 # Exponer puertos específicos
 EXPOSE 80 
 
+VOLUME /var/www/html/webimages
+
+
 # Comando de inicio
 CMD ["/bin/bash", "-c", "rm -f /run/php-fpm/www.sock; mkdir -p /run/php-fpm; chown apache:apache /run/php-fpm; php-fpm; chown apache:apache /run/php-fpm/www.sock; exec httpd -D FOREGROUND"]
 
