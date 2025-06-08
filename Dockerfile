@@ -54,5 +54,8 @@ RUN echo '#!/bin/bash' > /start.sh && \
 # Exponer puerto 80
 EXPOSE 80
 
+# Copiar el código fuente al contenedor
+COPY . /var/www/html
+
 # Comando para iniciar Apache usando el script
 CMD ["/start.sh"]
