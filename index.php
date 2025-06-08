@@ -51,7 +51,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>¡Hola Mundo desde Docker!</h1>
+        <h1>¡Hola Mundo desde Docker! Modificado</h1>
         
         <div class="info-box">
             <h3>🐧 Información del Sistema</h3>
