@@ -1,12 +1,10 @@
-version: '3.8'
-
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:80"  # Changed from "80:80" to use port 8080 instead
+      - "8080:80"
     volumes:
       - ./src:/var/www/html
       - webimagenes_data:/var/www/html/webimagenes

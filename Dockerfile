@@ -25,8 +25,13 @@ RUN dnf install -y \
     php-opcache \
     && dnf clean all
 
+
 # Configurar Apache
-RUN sed -i 's/#ServerName www.example.com:80/ServerName localhost:80/' /etc/httpd/conf/httpd.conf
+COPY apache-config.conf /etc/httpd/conf.d/custom.conf
+RUN echo "ServerName localhost" >> /etc/httpd/conf/httpd.conf && \
+    sed -i 's/Listen 80/Listen 0.0.0.0:80/' /etc/httpd/conf/httpd.conf
+
+# ...existing code...
 
 # Crear directorio para webimagenes y establecer permisos
 RUN mkdir -p /var/www/html/webimagenes && \
