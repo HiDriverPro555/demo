@@ -4,12 +4,15 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "${PORT:-80}:80"  # Easypanel uses PORT environment variable
     volumes:
       - ./src:/var/www/html
       - webimagenes_data:/var/www/html/webimagenes
     environment:
       - TZ=America/Mexico_City
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${service_name}.rule=Host(`${domain}`)"
     restart: unless-stopped
 
 volumes:
