@@ -27,16 +27,15 @@ RUN dnf install -y \
 
 # Configurar Apache
 COPY apache-config.conf /etc/httpd/conf.d/custom.conf
-RUN sed -i 's/#ServerName www.example.com:80/ServerName localhost/' /etc/httpd/conf/httpd.conf && \
-    sed -i 's/^Listen 80/Listen ${PORT:-80}/' /etc/httpd/conf/httpd.conf
+RUN sed -i 's/#ServerName www.example.com:80/ServerName localhost/' /etc/httpd/conf/httpd.conf
 
 # Crear directorio para webimagenes y establecer permisos
 RUN mkdir -p /var/www/html/webimagenes && \
     chown -R apache:apache /var/www/html && \
     chmod -R 755 /var/www/html
 
-# Exponer puerto configurado
-EXPOSE ${PORT:-80}
+# Exponer puerto 80
+EXPOSE 80
 
 # Comando para iniciar Apache en primer plano
-CMD ["sh", "-c", "exec /usr/sbin/httpd -D FOREGROUND"]
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
