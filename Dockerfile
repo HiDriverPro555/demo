@@ -25,21 +25,18 @@ RUN dnf install -y \
     php-opcache \
     && dnf clean all
 
-
 # Configurar Apache
 COPY apache-config.conf /etc/httpd/conf.d/custom.conf
-RUN echo "ServerName localhost" >> /etc/httpd/conf/httpd.conf && \
-    sed -i 's/Listen 80/Listen 0.0.0.0:80/' /etc/httpd/conf/httpd.conf
-
-# ...existing code...
+RUN sed -i 's/#ServerName www.example.com:80/ServerName localhost/' /etc/httpd/conf/httpd.conf && \
+    sed -i 's/^Listen 80/Listen ${PORT:-80}/' /etc/httpd/conf/httpd.conf
 
 # Crear directorio para webimagenes y establecer permisos
 RUN mkdir -p /var/www/html/webimagenes && \
     chown -R apache:apache /var/www/html && \
     chmod -R 755 /var/www/html
 
-# Exponer puerto 80
-EXPOSE 80
+# Exponer puerto configurado
+EXPOSE ${PORT:-80}
 
 # Comando para iniciar Apache en primer plano
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+CMD ["sh", "-c", "exec /usr/sbin/httpd -D FOREGROUND"]
