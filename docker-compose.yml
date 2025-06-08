@@ -10,7 +10,7 @@ services:
       - TZ=America/Mexico_City
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.hidriverpro.rule=Host(`${DOMAIN}`)"  # Changed to use Easypanel's DOMAIN variable
+      - "traefik.http.routers.hidriverpro.rule=Host(`${project_domain}`)"  # Changed to use Easypanel's project_domain variable
       - "traefik.http.services.hidriverpro.loadbalancer.server.port=80"
       - "traefik.http.services.hidriverpro.loadbalancer.passHostHeader=true"
     restart: unless-stopped
