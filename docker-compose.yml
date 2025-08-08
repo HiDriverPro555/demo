@@ -5,15 +5,12 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./src:/var/www/html
-      - webimagenes_data:/var/www/html/webimagenes
+      - ./webimagenes:/var/www/html/webimagenes
     environment:
-      - TZ=America/Mexico_City
+      - TZ=Asia/Jerusalem
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.hidriverpro.rule=Host(`dev.hidriver.co.il`)"
       - "traefik.http.services.hidriverpro.loadbalancer.server.port=80"
       - "traefik.http.services.hidriverpro.loadbalancer.passHostHeader=true"
     restart: unless-stopped
-
-volumes:
-  webimagenes_data:
