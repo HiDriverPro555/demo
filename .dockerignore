@@ -22,3 +22,6 @@ coverage/
 build/
 dist/
 docker-compose.override.yml
+
+# Exclude webimagenes to preserve volume mount
+webimagenes/
